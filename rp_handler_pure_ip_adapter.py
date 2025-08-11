@@ -83,7 +83,7 @@ logger.info("controlnet IS READY")
 repo_id = "black-forest-labs/FLUX.1-dev"
 PIPELINE = FluxPipeline.from_pretrained(
     repo_id,
-    torch_dtype=torch.bfloat16
+    torch_dtype=DTYPE
 ).to(DEVICE)
 
 
@@ -148,7 +148,7 @@ def handler(job: Dict[str, Any]) -> Dict[str, Any]:
         images = PIPELINE(
             width=work_w,
             height=work_h,
-            prompt="wearing sunglasses",
+            prompt=prompt,
             negative_prompt=neg_prompt,
             guidance_scale=guidance_scale,
             true_cfg_scale=true_cfg_scale,
